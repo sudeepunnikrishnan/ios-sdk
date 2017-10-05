@@ -20,7 +20,6 @@ class PaymentOptionsView: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         paymentOptionsTableView.tableFooterView = UIView()
-        mainStoryboard = Constants.getStoryboardInstance()
         self.reloadDataBasedOnOrder()
         NotificationCenter.default.addObserver(self, selector: #selector(self.backToViewController), name: NSNotification.Name("INSTAMOJO"), object: nil)
         
@@ -108,7 +107,8 @@ class PaymentOptionsView: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func onNetBankingSelected(options: String) {
-        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsListviewController) as? ListOptionsView {
+        mainStoryboard = Constants.getStoryboardInstance()
+        if let viewController : ListOptionsView = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsListviewController) as? ListOptionsView {
             viewController.paymentOption = options
             viewController.order = order
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -135,7 +135,8 @@ class PaymentOptionsView: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func onCreditCardSelected() {
-        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsCardViewController) as? CardFormView {
+        mainStoryboard = Constants.getStoryboardInstance()
+        if let viewController : CardFormView = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsCardViewController) as? CardFormView {
             viewController.cardType = Constants.CreditCard
             viewController.order = self.order
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -143,7 +144,8 @@ class PaymentOptionsView: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func onDebitCardSelected() {
-        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsCardViewController) as? CardFormView {
+        mainStoryboard = Constants.getStoryboardInstance()
+        if let viewController : CardFormView = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsCardViewController) as? CardFormView {
             viewController.cardType = Constants.DebitCard
             viewController.order = self.order
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -151,7 +153,8 @@ class PaymentOptionsView: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func onEmiSelected(options: String) {
-        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsListviewController) as? ListOptionsView {
+        mainStoryboard = Constants.getStoryboardInstance()
+        if let viewController : ListOptionsView = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsListviewController) as? ListOptionsView {
             viewController.paymentOption = options
             viewController.order = order
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -159,7 +162,8 @@ class PaymentOptionsView: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func onWalletSelected(options: String) {
-        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsListviewController) as? ListOptionsView {
+        mainStoryboard  = Constants.getStoryboardInstance()
+        if let viewController : ListOptionsView = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsListviewController) as? ListOptionsView {
             viewController.paymentOption = options
             viewController.order = order
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -167,7 +171,8 @@ class PaymentOptionsView: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func onUPISelected() {
-        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsUpiViewController) as? UPIPaymentView {
+        mainStoryboard = Constants.getStoryboardInstance()
+        if let viewController : UPIPaymentView = mainStoryboard.instantiateViewController(withIdentifier: Constants.PaymentOptionsUpiViewController) as? UPIPaymentView {
             viewController.order = order
             self.navigationController?.pushViewController(viewController, animated: true)
         }
